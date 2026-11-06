@@ -1,4 +1,3 @@
-
 name: Build Rafiq Muslim APK
 
 on:
@@ -14,6 +13,10 @@ jobs:
 
       - name: Extract project
         run: unzip -o rafiq-muslim-android-project.zip
+
+      - name: Fix Java version
+        run: |
+          find rafiq-android -type f \( -name "build.gradle" -o -name "build.gradle.kts" \) -exec sed -i 's/VERSION_1_8/VERSION_17/g' {} +
 
       - uses: actions/setup-java@v4
         with:
