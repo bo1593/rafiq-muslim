@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفيق مسلم - تطبيقك الإيماني اليومي</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #030F0A;
+            --bg-card: #072216;
+            --bg-accent: #0C3824;
+            --gold-light: #F4E0A5;
+            --gold-primary: #D4AF37;
+            --gold-dark: #AA7C11;
+            --text-light: #EAF7EF;
+            --text-muted: #8EB39B;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --border-gold-glow: rgba(212, 175, 55, 0.7);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(12, 56, 36, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Pattern Overlay */
+        .islamic-pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%23D4AF37' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header / Navbar */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 15, 10, 0.85);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .logo-text h1 {
+            font-family: 'Amiri', serif;
+            font-size: 22px;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .admin-btn {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-light);
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .admin-btn:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 70px 0 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: 'Amiri', serif;
+            font-size: 48px;
+            color: #FFFFFF;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--gold-primary);
+            background: linear-gradient(135deg, #FFF6D6, var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(12, 56, 36, 0.8);
+            border: 1px solid var(--border-gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: var(--gold-light);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            color: var(--bg-dark);
+            padding: 16px 36px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-gold);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
+        }
+
+        /* Mockup Mobile Frame */
+        .phone-mockup-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            width: 310px;
+            height: 620px;
+            background: #000;
+            border-radius: 45px;
+            border: 4px solid var(--gold-primary);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 25px;
+            background: #000;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #072216 0%, #030F0A 100%);
+            padding: 40px 15px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .app-mockup-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .app-mockup-header h3 {
+            font-family: 'Amiri', serif;
+            color: var(--gold-light);
+            font-size: 20px;
+        }
+
+        .prayer-card {
+            background: rgba(12, 56, 36, 0.9);
+            border: 1px solid var(--border-gold);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .prayer-time {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin: 5px 0;
+        }
+
+        .features-grid-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .mini-card i {
+            color: var(--gold-primary);
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'Amiri', serif;
+            font-size: 36px;
+            color: var(--gold-light);
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            transition: all 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .feature-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Admin Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .admin-modal {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-primary);
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            color: #fff;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            padding: 12px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .cta-buttons { justify-content: center; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="islamic-pattern-bg"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-kaaba"></i></div>
+                <div class="logo-text">
+                    <h1>رفيق مسلم</h1>
+                    <span>RAFIQ MUSLIM</span>
+                </div>
+            </a>
+            <button class="admin-btn" onclick="openAdminModal()">
+                <i class="fa-solid fa-user-gear"></i> لوحة الأدمن
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-content">
+            <div class="version-badge">
+                <i class="fa-solid fa-sparkles"></i>
+                الإصدار الحالي: <span id="current-version">v1.0.0</span>
+            </div>
+            <h2 class="hero-title">رفيقك الإيماني <span>اليومي المكتمل</span></h2>
+            <p class="hero-desc">
+                تطبيق رفيق مسلم يجمع لك مواقيت الصلاة الدقيقة، أذكار الصباح والمساء، أوقات الأذان، اتجاه القبلة، والقرآن الكريم في واجهة إسلامية فاخرة وبدون إعلانات مزعجة.
+            </p>
+            <div class="cta-buttons">
+                <a href="Rafiq_Muslim.apk" id="main-download-link" class="download-btn" download>
+                    <i class="fa-solid fa-download"></i> تحميل APK المباشر
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Phone Mockup -->
+        <div class="phone-mockup-wrapper">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="app-mockup-header">
+                        <h3>رفيق مسلم</h3>
+                        <span style="font-size: 11px; color: var(--gold-primary);">التطبيـق الإيمـانـي</span>
+                    </div>
+
+                    <div class="prayer-card">
+                        <div style="font-size: 12px; color: var(--text-muted);">الصلاة القادمة: الفجر</div>
+                        <div class="prayer-time">04:15 AM</div>
+                        <div style="font-size: 11px; color: var(--gold-light);"><i class="fa-regular fa-clock"></i> متبقي 02:45:10</div>
+                    </div>
+
+                    <div class="features-grid-mini">
+                        <div class="mini-card"><i class="fa-solid fa-book-quran"></i>القرآن الكريم</div>
+                        <div class="mini-card"><i class="fa-solid fa-compass"></i>اتجاه القبلة</div>
+                        <div class="mini-card"><i class="fa-solid fa-hands-praying"></i>الأذكار والأدعية</div>
+                        <div class="mini-card"><i class="fa-solid fa-calendar-days"></i>التقويم الهجري</div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="Rafiq_Muslim.apk" id="phone-download-btn" class="download-btn" style="padding: 10px 20px; font-size: 14px; width: 100%; justify-content: center;" download>
+                            <i class="fa-solid fa-download"></i> تنزيل الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features container">
+        <div class="section-title">
+            <h2>مميزات تطبيق رفيق مسلم</h2>
+            <p>تم تصميمه بدقة ليكون خير رفيق لك في حياتك اليومية</p>
+        </div>
+        <div class="grid-3">
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3>مواقيت صلاة دقيقة</h3>
+                <p>تنبيهات الأذان ومواقيت الصلاة حسب موقعك الجغرافي وبأحدث طرق الحساب الفلكية.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
+                <h3>القرآن الكريم كامل</h3>
+                <p>قراءة واستماع لأشهر القراء بدون حاجة للاتصال بالإنترنت مع تفسير الآيات.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fa-solid fa-kaaba"></i></div>
+                <h3>بوصلة القبلة</h3>
+                <p>تحديد اتجاه القبلة بدقة عالية عبر البوصلة المدمجة في أي مكان في العالم.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Modal -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="admin-modal">
+            <button class="close-modal" onclick="closeAdminModal()">&times;</button>
+            <h3 style="color: var(--gold-light); margin-bottom: 20px; font-family: 'Amiri'; text-align: center; font-size: 24px;">لوحة تحكم الأدمن</h3>
+            
+            <form id="adminForm" onsubmit="saveAppData(event)">
+                <div class="form-group">
+                    <label>رقم الإصدار الجديد (Version):</label>
+                    <input type="text" id="appVersionInput" class="form-input" placeholder="مثال: v1.0.1" required>
+                </div>
+                <div class="form-group">
+                    <label>رابط تحميل APK المباشر:</label>
+                    <input type="text" id="appLinkInput" class="form-input" placeholder="Rafiq_Muslim.apk" required>
+                </div>
+                <button type="submit" class="submit-btn">حفظ وتحديث الموقع</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Default Data
+        const defaultVersion = "v1.0.0";
+        const defaultLink = "Rafiq_Muslim.apk";
+
+        // Load data on start
+        window.onload = function() {
+            const savedVersion = localStorage.getItem('rafiq_version') || defaultVersion;
+            const savedLink = localStorage.getItem('rafiq_link') || defaultLink;
+
+            updateUI(savedVersion, savedLink);
+        };
+
+        function updateUI(version, link) {
+            document.getElementById('current-version').innerText = version;
+            document.getElementById('main-download-link').href = link;
+            document.getElementById('phone-download-btn').href = link;
+            
+            document.getElementById('appVersionInput').value = version;
+            document.getElementById('appLinkInput').value = link;
+        }
+
+        function openAdminModal() {
+            const pass = prompt("أدخل كلمة مرور الأدمن:");
+            if (pass === "admin123") {
+                document.getElementById('adminModal').style.display = 'flex';
+            } else if (pass !== null) {
+                alert("كلمة المرور غير صحيحة!");
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function saveAppData(e) {
+            e.preventDefault();
+            const newVersion = document.getElementById('appVersionInput').value;
+            const newLink = document.getElementById('appLinkInput').value;
+
+            localStorage.setItem('rafiq_version', newVersion);
+            localStorage.setItem('rafiq_link', newLink);
+
+            updateUI(newVersion, newLink);
+            closeAdminModal();
+            alert("تم تحديث معلومات التطبيق بنجاح!");
+        }
+    </script>
+</body>
+</html>
